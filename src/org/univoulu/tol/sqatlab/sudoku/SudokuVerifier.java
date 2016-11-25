@@ -4,29 +4,29 @@ public class SudokuVerifier {
 	String candidateSolution;
 	int verify = 0;
 
-	public SudokuVerifier(String candidateSolution) {
-		this.candidateSolution = candidateSolution;
+	public SudokuVerifier(String candidateSolution) throws IllegalSudokuSolutionException {
+		if(candidateSolution.length() == 81)
+			this.candidateSolution = candidateSolution;	
+		else
+			throw new IllegalSudokuSolutionException();
+		
+		
 	}
 
 	public int verify() {
-		char[] d = candidateSolution.toCharArray();
 
-		for (char c : d) {
-			if (!Character.isDigit(c)) {
-				verify = -1;
-			}
-		}
+		firstRule();
 
-		if (verify == 0) {
+		if (verify != -1) {
 			secondRule();
 
 			if (verify != -2)
 				thirdhRule();
 
-			if (verify != -3) {
+			if (verify != -3) 
 				fourthRule();
 
-			}
+			
 
 		}
 
@@ -91,6 +91,20 @@ public class SudokuVerifier {
 				verify = -4;
 
 		}
+
+	}
+
+	private void firstRule() {
+		char[] d = candidateSolution.toCharArray();
+
+		for (char c : d) {
+			if (!Character.isDigit(c)) {
+				verify = -1;
+			}
+		}
+		
+		if(candidateSolution.contains("0"))
+			verify = -1;
 
 	}
 
