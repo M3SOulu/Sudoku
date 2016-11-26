@@ -11,7 +11,8 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({ 
 	TestSudokuVerifierRule1.class, 
 	TestSudokuVerifierRule2.class, 
-	TestSudokuVerifierRule3.class 
+	TestSudokuVerifierRule3.class,
+	TestSudokuVerifierRule4.class
 })
 public class TestSudokuVerifier {
 	
