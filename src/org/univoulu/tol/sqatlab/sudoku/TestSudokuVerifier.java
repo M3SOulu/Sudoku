@@ -46,6 +46,38 @@ public class TestSudokuVerifier {
 		assertEquals(-1,sudoVer.verify(candidateSolution));
 	}
 	
+	@Test
+	public void testGetSubString(){
+		
+		String s="123123123456456456789789789123123123456456456789789789123123123456456456789789789";
+		
+		assertEquals("123456789", sudoVer.getSubGrid(s).get(0));
+		assertEquals("123456789", sudoVer.getSubGrid(s).get(1));
+		assertEquals("123456789", sudoVer.getSubGrid(s).get(2));
+		assertEquals("123456789", sudoVer.getSubGrid(s).get(4));
+		assertEquals("123456789", sudoVer.getSubGrid(s).get(5));
+		assertEquals("123456789", sudoVer.getSubGrid(s).get(6));
+		assertEquals("123456789", sudoVer.getSubGrid(s).get(7));
+		assertEquals("123456789", sudoVer.getSubGrid(s).get(8));
+		
+	}
+	
+	
+	@Test
+	public void testSecondRule(){
+		
+		String s="123123123456456456789789789123123123456456456789789789123123123456456456789789789";
+		
+		assertEquals(0,sudoVer.verify(s));
+		
+		s="417369825632158947958724316825437169791586432346912758289643571573291684164875293";
+		
+		assertEquals(0,sudoVer.verify(s));
+		
+		s="117369825632158947958724316825437169791586432346912758289643571573291684164875293";
+		
+		assertEquals(-2,sudoVer.verify(s));
+	}
 	
 
 }

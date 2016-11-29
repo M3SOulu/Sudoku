@@ -1,6 +1,7 @@
 package org.univoulu.tol.sqatlab.sudoku;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class SudokuVerifier {
 
@@ -10,10 +11,16 @@ public class SudokuVerifier {
 
 		int result = 0;
 
-		if (!checkFirstRule(candidateSolution))
+		if (!checkFirstRule(candidateSolution)){
+			
 			result = -1;
-		
+			
+		}else if(!checkSecondRule(candidateSolution)){
+			
+			result= -2;
+		}
 
+		
 		return result;
 	}
 
@@ -55,25 +62,50 @@ public class SudokuVerifier {
 	 * @return
 	 */
 	private boolean checkSecondRule(String candidateSolution) {
-
-		// TODO
-
-		boolean result = true;
+		
+		int counter[];
+		
+		boolean result=true;
+				
+		ArrayList<String> subgridsList= getSubGrid(candidateSolution);
+		
+		Iterator<String> it= subgridsList.iterator();
+		
+		while(it.hasNext()){
+			
+			counter= new int[9];
+			String localGrid= it.next();
+			
+			for(int i=0;i<localGrid.length();i++){
+				
+				int num= Integer.parseInt(localGrid.substring(i, i+1));
+				counter[num-1]++;
+				
+				if(counter[num-1]>=2){
+					
+					result=false;
+					break;
+				}
+			}
+			
+			
+		}
 
 		return result;
 	}
 	
 	/**
 	 * extract sub grids
-	 * @param candidateSolution
+	 * @param candidateSolution string  not null
 	 * @return arrayList that contains the 9 subgrids planed on a string
 	 */
-	private ArrayList<String> getSubGrid(String candidateSolution){
+	public ArrayList<String> getSubGrid(String candidateSolution){
 		
 		int gridShift=3;
 		int init_start=0;
 		int init_end=init_start+3;
 		int shift=9;
+		
 		
 		ArrayList<String> subGrids= new ArrayList<String>(9);
 		
@@ -94,6 +126,10 @@ public class SudokuVerifier {
 			
 			subGrids.add(tempGrid);
 			
+			if(k==2){gridShift=27;} // grid row adjustments
+			
+			if(k==5){gridShift=54;}
+						
 			start=gridShift;
 			end=start+3;
 			gridShift+=3;
