@@ -52,7 +52,7 @@ public class TestSudokuVerifier {
 	@Test
 	public void repetitionInARowShouldReturnMinus3() throws NotValidSolutionLength {
 		//Arrange
-		String solution = "447369825632158947958724316825437169791586432346912758289643571573291684164875293";
+		String solution = "417469825632158947958723316825437169791586432346912758289643571573291684164875293";
 		//Act & Assert
 		assertTrue(verifier.verify(solution) == -3);
 	}
@@ -60,8 +60,25 @@ public class TestSudokuVerifier {
 	@Test
 	public void repetitionInAColumnShouldReturnMinus4() throws NotValidSolutionLength {
 		//Arrange
-		String solution = "417369825632158947958724316825437169791586432346912758289643571574291683164875293";
+		String solution = "417369825632158947958724316425437169791586432386912758289643571573291684164875293";
 		//Act & Assert
 		assertTrue(verifier.verify(solution) == -4);
 	}
+
+	@Test
+	public void repetitionInASubgridShouldReturnMinus2() throws NotValidSolutionLength {
+		//Arrange
+		String solution = "417369825634158947958724316825437169791586432346912758289643571573291684164875293";
+		//Act & Assert
+		assertTrue(verifier.verify(solution) == -2);
+	}
+	
+	@Test
+	public void aValidSolutionShouldReturnZero() throws NotValidSolutionLength{
+		//Arrange
+		String solution = "417369825632158947958724316825437169791586432346912758289643571573291684164875293";
+		//Act & Assert
+		assertTrue(verifier.verify(solution) == 0);
+	}
+	
 }
