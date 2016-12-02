@@ -45,16 +45,16 @@ public class TestSudokuVerifier {
 	@Test
 	public void incorrectSudokuAnswerWithDuplicateNumberInColumnsAndRows() throws IllegalSudokuSolutionException {
 		SudokuVerifier sv = new SudokuVerifier(
-				  "417369825"
-				+ "632158947"
-				+ "958724316"
-				+ "925437169"
-				+ "781586432"
-				+ "346912758"
-				+ "289643571"
-				+ "573291684"
-				+ "164875293");
-		assertEquals(-3, sv.verify());
+				  "123456789"
+				+ "789123456"
+				+ "456789123"
+				+ "123456789"
+				+ "789123456"
+				+ "456789123"
+				+ "123456789"
+				+ "789123456"
+				+ "456789123");
+		assertEquals(-4, sv.verify());
 	}
 	
 	@Test(expected = IllegalSudokuSolutionException.class)
